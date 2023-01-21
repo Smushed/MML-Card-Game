@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "atYbq7uaxk5aQpJEnz9TuQxPnOJXpL9ofoJ09GXO7SvrYQES0+otost638/02kZPMeKX2iOCMs17cxc8E7pSYw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Kevin.Flerlage\\per\\MML-Card-Game\\MML-Card-BE\\MML-Card-BE.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Kevin.Flerlage\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
