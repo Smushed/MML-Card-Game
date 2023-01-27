@@ -6,7 +6,7 @@ namespace MML_Card_BE.Models.Card.Creature
 {
     public class Monster : IMonster
     {
-        public string? _id { get; set; }
+        private string? _id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public CardType TypeOfCard { get; set; }

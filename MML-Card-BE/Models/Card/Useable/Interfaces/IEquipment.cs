@@ -2,7 +2,7 @@
 
 namespace MML_Card_BE.Models.Card.Useable.Interfaces
 {
-    public interface IEquipment
+    public interface IEquipment : ICardBase
     {
         string Name { get; set; }
         EquipmentSlot Slot { get; set; }

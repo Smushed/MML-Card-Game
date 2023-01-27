@@ -16,6 +16,9 @@ RUN dotnet build "MML-Card-BE.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "MML-Card-BE.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
+EXPOSE 4040
+ENV ASPNETCORE_URLS=http://*:4040
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

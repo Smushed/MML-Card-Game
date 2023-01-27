@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CardBase from "../../models/CardBase";
 
 const CardLibrary = () => {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState<CardBase[]>([]);
 
   useEffect(() => {
     pullAllCards();
@@ -17,7 +18,16 @@ const CardLibrary = () => {
     }
   };
 
-  return <div>Card Library</div>;
+  return (
+    <>
+      {cards.map((card) => (
+        <div key={card._id}>
+          <h1>{card.name}</h1>
+          <p>{card.description}</p>
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default CardLibrary;

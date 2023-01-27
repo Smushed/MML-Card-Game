@@ -9,18 +9,13 @@ namespace MML_Card_BE.Models.Card
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? _id { get; set; }
+        private string? _id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
         [BsonElement("description")]
         public string? Description { get; set; }
         [BsonElement("cardType")]
         public CardType TypeOfCard { get; set; }
-
-        public CardBase(ReplaceOneResult updatedCard)
-        {
-            var what = "This is a consturctor when a card is updated";
-        }
 
         public CardBase(string? id, string name, string? description, CardType typeOfCard)
         {

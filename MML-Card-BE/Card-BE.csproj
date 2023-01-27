@@ -7,6 +7,7 @@
     <RootNamespace>MML_Card_BE</RootNamespace>
     <UserSecretsId>6beb1958-f511-4413-a45f-ead3575246f5</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<DockerfileRunArguments>-p "4040:443" -p "5050:80"</DockerfileRunArguments>
   </PropertyGroup>
 
   <ItemGroup>
