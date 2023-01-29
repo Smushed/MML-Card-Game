@@ -1,5 +1,6 @@
-import Equipment from "./Equipment";
-import Effect from "./Effect";
-import Ability from "./Ability";
+import Equipment from './Equipment';
+import Effect from './Effect';
+import Barricade from './Barricade';
+import Battlefield from './Battlefield';
 
-export { Equipment, Effect, Ability };
+export { Equipment, Effect, Battlefield, Barricade };

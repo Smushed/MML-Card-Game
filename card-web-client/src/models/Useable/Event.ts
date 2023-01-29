@@ -1,11 +1,11 @@
 import { ICardBase } from '../CardBase';
 import CardTypeEnum from '../Enum/CardTypeEnum';
 
-interface IEffect extends ICardBase {
-  onTrigger: Function;
+interface IEvent extends ICardBase {
+  onUse: Function;
 }
 
-class Effect implements IEffect {
+class Event implements IEvent {
   _id: number;
   name: string;
   description: string;
@@ -17,21 +17,21 @@ class Effect implements IEffect {
     this.cardType = CardTypeEnum[value as keyof typeof CardTypeEnum];
   }
 
-  onTrigger: Function;
+  onUse: Function;
 
   constructor(
     _id: number,
     name: string,
     description: string,
     cardType: CardTypeEnum,
-    onTrigger: Function
+    onUse: Function
   ) {
     this._id = _id;
     this.name = name;
     this.description = description;
     this.cardType = cardType;
-    this.onTrigger = onTrigger;
+    this.onUse = onUse;
   }
 }
 
-export default Effect;
+export default Event;

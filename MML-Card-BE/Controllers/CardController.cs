@@ -26,17 +26,17 @@ namespace MML_Card_BE.Controllers
         }
 
         [HttpPost(Name = "CreateCard")]
-        public async void CreateCard(string name, string description, CardType typeOfCard)
+        public async void CreateCard(string name, string description, CardTypeEnum typeOfCard)
         {
             var cardToCreate = new CardBase(null, name, description, typeOfCard);
             await _cardService.CreateAsync(cardToCreate);
         }
 
-        [HttpPut(Name = "UpdateCard")]
-        public async Task<CardBase> UpdateCard(CardBase cardToUpdate)
-        {
-            var updatedCard = await _cardService.UpdateOneAsync(cardToUpdate);
-            return updatedCard;
-        }
+        //[HttpPut(Name = "UpdateCard")]
+        //public async Task<CardBase> UpdateCard(CardBase cardToUpdate)
+        //{
+        //    var updatedCard = await _cardService.UpdateOneAsync(cardToUpdate);
+        //    return updatedCard;
+        //}
     }
 }

@@ -1,9 +1,10 @@
-enum CardType {
+enum CardTypeEnum {
   Hero,
   Monster,
   Event,
   FlashEvent,
   Equipment,
   Barricade,
+  Battlefield,
 }
-export default CardType;
+export default CardTypeEnum;

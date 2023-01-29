@@ -1,7 +1,7 @@
-﻿using MML_Card_BE.Models.Card.Useable.Interfaces;
-using MML_Card_BE.Models.Enum;
+﻿using MML_Card_BE.Models.Enum;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using MML_Card_BE.Models.Card.Useable.Interfaces;
 
 namespace MML_Card_BE.Models.Card.Useable
 {
@@ -9,13 +9,11 @@ namespace MML_Card_BE.Models.Card.Useable
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        private string? _id { get; set; }
+        public string? _id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
         [BsonElement("description")]
         public string? Description { get; set; }
-        [BsonElement("cardType")]
-        public CardType TypeOfCard { get; set; }
 
         public Func<string> OnUse { get; set; }
     }

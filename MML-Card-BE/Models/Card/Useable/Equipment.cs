@@ -9,13 +9,17 @@ namespace MML_Card_BE.Models.Card.Useable
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        private string? _id { get; set; }
+        public string? _id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
         [BsonElement("description")]
         public string? Description { get; set; }
         [BsonElement("cardType")]
-        public CardType TypeOfCard { get; set; }
+        private CardTypeEnum CardType { get; set; }
+        public string type
+        {
+            get => CardType.ToString();
+        }
 
         public EquipmentSlot Slot { get; set; }
         public int? Bonus { get; set; }

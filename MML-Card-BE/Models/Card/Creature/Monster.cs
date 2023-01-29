@@ -6,10 +6,14 @@ namespace MML_Card_BE.Models.Card.Creature
 {
     public class Monster : IMonster
     {
-        private string? _id { get; set; }
+        public string? _id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public CardType TypeOfCard { get; set; }
+        private CardTypeEnum CardType { get; set; }
+        public string type
+        {
+            get => CardType.ToString();
+        }
 
         public int Level { get; set; }
         public string[] CreatureType { get; set; } //This will come from the DB. Need to have a them in there
