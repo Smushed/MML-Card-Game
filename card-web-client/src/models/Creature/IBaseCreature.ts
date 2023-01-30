@@ -9,8 +9,8 @@ interface IBaseCreature extends ICardBase {
   equippedItems: Equipment[];
   equipmentSlots: EquipmentSlot[];
   effect: Effect[];
-  Abilities: Ability[];
-  Exhaust: Function;
+  abilities: Ability[];
+  exhaust: Function;
 }
 
 export default IBaseCreature;

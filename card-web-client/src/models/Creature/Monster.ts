@@ -25,8 +25,8 @@ class Monster implements IMonster {
   equippedItems: Equipment[];
   equipmentSlots: EquipmentSlot[];
   effect: Effect[];
-  Abilities: Ability[];
-  Exhaust: Function;
+  abilities: Ability[];
+  exhaust: Function;
 
   monsterType: string[];
 
@@ -39,8 +39,8 @@ class Monster implements IMonster {
     equippedItems: Equipment[],
     equipmentSlots: EquipmentSlot[],
     effect: Effect[],
-    Abilities: Ability[],
-    Exhaust: Function,
+    abilities: Ability[],
+    exhaust: Function,
     monsterType: string[]
   ) {
     this._id = _id;
@@ -51,8 +51,8 @@ class Monster implements IMonster {
     this.equippedItems = equippedItems;
     this.equipmentSlots = equipmentSlots;
     this.effect = effect;
-    this.Abilities = Abilities;
-    this.Exhaust = Exhaust;
+    this.abilities = abilities;
+    this.exhaust = exhaust;
     this.monsterType = monsterType;
   }
 }
@@ -75,8 +75,8 @@ function createGenericMonster(): Monster {
       EquipmentSlotEnum.Ranged,
     ], // equipmentSlots
     [], // effect
-    [], // Abilities
-    () => {}, // Exhaust
+    [], // abilities
+    () => {}, // exhaust
     ['Generic', 'Undead'] // monsterType
   );
 }

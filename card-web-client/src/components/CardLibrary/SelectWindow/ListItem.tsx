@@ -1,13 +1,14 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { motion } from 'framer-motion';
 import CardBase from '../../../models/CardBase';
+import { SelectedCardContext } from '..';
 
 interface IListItem {
   card: CardBase;
-  setSelectedCard: Function;
 }
 
-const ListItem: FC<IListItem> = ({ card, setSelectedCard }) => {
+const ListItem: FC<IListItem> = ({ card }) => {
+  const { setSelected } = useContext(SelectedCardContext);
   return (
     <motion.div
       className='mt-1 p-2 ps-4 border border-dark rounded-1 mousePointer'
@@ -17,7 +18,7 @@ const ListItem: FC<IListItem> = ({ card, setSelectedCard }) => {
         backgroundColor: '#F8F8F8',
       }}
       whileTap={{ scale: 0.98 }}
-      onClick={() => setSelectedCard(card)}
+      onClick={() => setSelected(card)}
     >
       <div className='row'>
         <div className='col-4'>

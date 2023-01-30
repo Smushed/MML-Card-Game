@@ -23,8 +23,8 @@ class Hero implements IHero {
   equippedItems: Equipment[];
   equipmentSlots: EquipmentSlot[];
   effect: Effect[];
-  Abilities: Ability[];
-  Exhaust: Function;
+  abilities: Ability[];
+  exhaust: Function;
 
   constructor(
     _id: number,
@@ -35,8 +35,8 @@ class Hero implements IHero {
     equippedItems: Equipment[],
     equipmentSlots: EquipmentSlot[],
     effect: Effect[],
-    Abilities: Ability[],
-    Exhaust: Function
+    abilities: Ability[],
+    exhaust: Function
   ) {
     this._id = _id;
     this.name = name;
@@ -46,8 +46,8 @@ class Hero implements IHero {
     this.equippedItems = equippedItems;
     this.equipmentSlots = equipmentSlots;
     this.effect = effect;
-    this.Abilities = Abilities;
-    this.Exhaust = Exhaust;
+    this.abilities = abilities;
+    this.exhaust = exhaust;
   }
 }
 

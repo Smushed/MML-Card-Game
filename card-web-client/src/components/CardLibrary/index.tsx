@@ -1,19 +1,50 @@
 import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
-import CardBase, { createGenericCardBase } from '../../models/CardBase';
+import CardBase from '../../models/CardBase';
 import SelectWindow from './SelectWindow';
 
 import './CardLibrary.css';
-import CardDisplay from './CardDisplay';
-
-const genericCard = createGenericCardBase();
+import CardDisplayAndEditor from './CardDisplayAndEditor';
+import { Hero, Monster } from '../../models/Creature';
+import { Barricade, Battlefield, Equipment } from '../../models/Useable';
 
 const CardContext = createContext<CardBase[]>([]);
-const SelectedCardContext = createContext<CardBase>(genericCard);
+const SelectedCardContext = createContext<{
+  selected:
+    | CardBase
+    | Hero
+    | Monster
+    | Equipment
+    | Barricade
+    | Battlefield
+    | Event
+    | null;
+  setSelected: React.Dispatch<
+    React.SetStateAction<
+      | CardBase
+      | Hero
+      | Monster
+      | Equipment
+      | Barricade
+      | Battlefield
+      | Event
+      | null
+    >
+  >;
+}>({ selected: null, setSelected: () => {} });
 
 const CardLibrary = () => {
   const [cards, setCards] = useState<CardBase[]>([]);
-  const [selectedCard, setSelectedCard] = useState<CardBase>(genericCard);
+  const [selectedCard, setSelectedCard] = useState<
+    | CardBase
+    | Hero
+    | Monster
+    | Equipment
+    | Barricade
+    | Battlefield
+    | Event
+    | null
+  >(null);
 
   useEffect(() => {
     pullAllCards();
@@ -31,10 +62,12 @@ const CardLibrary = () => {
   return (
     <>
       <CardContext.Provider value={cards}>
-        <SelectedCardContext.Provider value={selectedCard}>
+        <SelectedCardContext.Provider
+          value={{ selected: selectedCard, setSelected: setSelectedCard }}
+        >
           <div className='d-flex row justify-content-evenly'>
-            <SelectWindow setSelectedCard={setSelectedCard} />
-            <CardDisplay setSelectedCard={setSelectedCard} />
+            <SelectWindow />
+            <CardDisplayAndEditor />
           </div>
         </SelectedCardContext.Provider>
       </CardContext.Provider>
