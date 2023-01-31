@@ -18,7 +18,7 @@ const Editor = () => {
     {
       valueName: 'equipmentSlots',
       labelText: 'Equipment Slots',
-      inputType: 'select',
+      inputType: 'checkbox',
     },
     {
       valueName: 'equipmentSlot',
@@ -46,7 +46,7 @@ const Editor = () => {
     <div className='col-8 col-md-6'>
       <h2>Editor Window</h2>
       <form onSubmit={submitForm}>
-        <div className='row input-group col-12'>
+        <div className='row col-12'>
           {possibleInputFields.map(
             (field) =>
               doesHaveField(selected, field.valueName) && (
@@ -64,27 +64,102 @@ interface IInputFieldForCard {
 }
 
 const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
-  const { selected } = useContext(SelectedCardContext);
+  const { selected, setSelected } = useContext(SelectedCardContext);
+  const [InputBox, setInputBox] = useState(<></>);
 
-  //radio, checkbox, select, input
-  // const [valForInput, setValForInput] = useState<
-  //   string | number | string[] | CardTypeEnum | undefined
-  // >('');
+  useEffect(() => {
+    renderInput();
+  }, [inputInfo]);
 
-  // useEffect(() => {}, [selected, valueName]);
+  const renderInput = () => {
+    switch (inputInfo.inputType) {
+      case 'select':
+        setInputBox(
+          <select className='form-select' id={`${inputInfo.valueName}`}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        );
+        break;
+      case 'text':
+        setInputBox(
+          <input
+            type={inputInfo.inputType}
+            className='form-control'
+            id={`${inputInfo.valueName}`}
+            value={selected[inputInfo.valueName as keyof typeof selected]}
+            onChange={(e) => {
+              updateField(e);
+            }}
+          />
+        );
+        break;
+      case 'number':
+        setInputBox(
+          <input
+            type={inputInfo.inputType}
+            className='form-control'
+            id={`${inputInfo.valueName}`}
+            value={selected[inputInfo.valueName as keyof typeof selected]}
+            onChange={(e) => {
+              updateField(e);
+            }}
+          />
+        );
+        break;
+      case 'checkbox':
+        setInputBox(
+          <input
+            type='checkbox'
+            className='form-check-input'
+            id={`${inputInfo.valueName}`}
+            // value={selected[inputInfo.valueName as keyof typeof selected]}
+            onChange={(e) => {
+              updateField(e);
+            }}
+          />
+        );
+        break;
+      case 'radio':
+        setInputBox(
+          <input
+            type='radio'
+            className='form-check-input'
+            id={`${inputInfo.valueName}`}
+            // value={selected[inputInfo.valueName as keyof typeof selected]}
+            onChange={(e) => {
+              updateField(e);
+            }}
+          />
+        );
+        break;
+      default:
+        setInputBox(<div>butt</div>);
+        break;
+    }
+  };
+
+  const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelected({
+      ...selected,
+      [e.target.id]: e.target.value,
+    } as typeof selected);
+  };
 
   return (
-    <>
-      <label htmlFor={`${inputInfo.valueName}Input`} className='form-label'>
-        {inputInfo.labelText}
-      </label>
-      <input
-        type='text'
-        className='form-control'
-        id={`${inputInfo.valueName}Input`}
-        // value={valForInput}
-      />
-    </>
+    <div className='row input-group'>
+      <div className='col-12'>
+        <div className='mb-2'>
+          <label htmlFor={`${inputInfo.valueName}Input`}>
+            <small>{inputInfo.labelText}</small>
+          </label>
+          {InputBox}
+        </div>
+      </div>
+    </div>
   );
 };
 
