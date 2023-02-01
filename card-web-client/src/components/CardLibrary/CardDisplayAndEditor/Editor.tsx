@@ -1,6 +1,10 @@
 import { FC, useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { SelectedCardContext } from '..';
 import { doesHaveField } from '../../../functions/CardFieldChecker';
+import EquipmentSlotEnum, {
+  EquipmentSlotEnumArray,
+} from '../../../models/Enum/EquipmentSlotEnum';
 
 type CardInputFields = {
   valueName: string;
@@ -18,7 +22,7 @@ const Editor = () => {
     {
       valueName: 'equipmentSlots',
       labelText: 'Equipment Slots',
-      inputType: 'checkbox',
+      inputType: 'equipmentSlots',
     },
     {
       valueName: 'equipmentSlot',
@@ -39,7 +43,6 @@ const Editor = () => {
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('submitting form');
   };
 
   return (
@@ -50,7 +53,7 @@ const Editor = () => {
           {possibleInputFields.map(
             (field) =>
               doesHaveField(selected, field.valueName) && (
-                <InputFieldForCard inputInfo={field} />
+                <InputFieldForCard inputInfo={field} key={field.valueName} />
               )
           )}
         </div>
@@ -65,16 +68,89 @@ interface IInputFieldForCard {
 
 const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
   const { selected, setSelected } = useContext(SelectedCardContext);
-  const [InputBox, setInputBox] = useState(<></>);
 
-  useEffect(() => {
-    renderInput();
-  }, [inputInfo]);
+  //To iterate through the selected card's equipment slots without worrying if they have key
+  //We do the check in the switch statement below
+  const slots = selected as any;
+
+  const EquipmentSlotInput = () => {
+    const updateEquipmentSlot = (
+      e: React.ChangeEvent<HTMLSelectElement>,
+      i: number
+    ) => {
+      const newSlots = slots.equipmentSlots;
+      newSlots[i] = e.target.value as EquipmentSlotEnum;
+      setSelected({ ...selected, equipmentSlots: newSlots } as typeof selected);
+    };
+
+    const addRemoveEquipmentSlot = (addOrRemove: string) => {
+      let updatedSlots;
+      switch (addOrRemove) {
+        case 'add':
+          updatedSlots = slots.equipmentSlots;
+          updatedSlots.push(EquipmentSlotEnum.Head);
+          setSelected({
+            ...selected,
+            equipmentSlots: updatedSlots,
+          } as typeof selected);
+          break;
+        case 'remove':
+          updatedSlots = slots.equipmentSlots;
+          updatedSlots.pop();
+          setSelected({
+            ...selected,
+            equipmentSlots: updatedSlots,
+          } as typeof selected);
+          break;
+      }
+    };
+
+    return (
+      <>
+        <div className='row'>
+          {slots.equipmentSlots.map((slot: EquipmentSlotEnum, i: number) => (
+            <div className='col-6' key={i}>
+              <select
+                className='form-select'
+                id={`${inputInfo.valueName}`}
+                value={slot}
+                onChange={(e) => {
+                  updateEquipmentSlot(e, i);
+                }}
+              >
+                {EquipmentSlotEnumArray.map((slot) => (
+                  <option value={slot} key={slot}>
+                    {slot}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className='row'>
+          <div className='d-flex col-12 justify-content-evenly mt-2'>
+            <button
+              className='btn btn-primary'
+              onClick={() => addRemoveEquipmentSlot('add')}
+            >
+              Add Slot
+            </button>
+            <button
+              className='btn btn-warning'
+              onClick={() => addRemoveEquipmentSlot('remove')}
+            >
+              Remove Slot
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  };
 
   const renderInput = () => {
     switch (inputInfo.inputType) {
       case 'select':
-        setInputBox(
+        return (
           <select className='form-select' id={`${inputInfo.valueName}`}>
             <option>1</option>
             <option>2</option>
@@ -83,9 +159,8 @@ const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
             <option>5</option>
           </select>
         );
-        break;
       case 'text':
-        setInputBox(
+        return (
           <input
             type={inputInfo.inputType}
             className='form-control'
@@ -96,9 +171,8 @@ const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
             }}
           />
         );
-        break;
       case 'number':
-        setInputBox(
+        return (
           <input
             type={inputInfo.inputType}
             className='form-control'
@@ -109,9 +183,8 @@ const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
             }}
           />
         );
-        break;
       case 'checkbox':
-        setInputBox(
+        return (
           <input
             type='checkbox'
             className='form-check-input'
@@ -122,9 +195,8 @@ const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
             }}
           />
         );
-        break;
       case 'radio':
-        setInputBox(
+        return (
           <input
             type='radio'
             className='form-check-input'
@@ -135,14 +207,34 @@ const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
             }}
           />
         );
-        break;
+      case 'equipmentSlots':
+        return <EquipmentSlotInput />;
       default:
-        setInputBox(<div>butt</div>);
-        break;
+        return <></>;
     }
   };
 
+  const inputIsValid = (checkField: string, valueToCheck: string): boolean => {
+    //Level checking
+    if (checkField === 'level') {
+      if (valueToCheck !== '') {
+        const convertedValue = parseInt(valueToCheck);
+        if (convertedValue <= 0) {
+          toast.error('Level cannot be less than 1');
+          return false;
+        } else if (convertedValue > 9) {
+          toast.error('Level cannot be greater than 9');
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
   const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!inputIsValid(e.target.id, e.target.value)) {
+      return;
+    }
     setSelected({
       ...selected,
       [e.target.id]: e.target.value,
@@ -150,14 +242,12 @@ const InputFieldForCard: FC<IInputFieldForCard> = ({ inputInfo }) => {
   };
 
   return (
-    <div className='row input-group'>
-      <div className='col-12'>
-        <div className='mb-2'>
-          <label htmlFor={`${inputInfo.valueName}Input`}>
-            <small>{inputInfo.labelText}</small>
-          </label>
-          {InputBox}
-        </div>
+    <div className='row input-group border rounded-1 mt-2'>
+      <div className='col-12 mb-2 text-center'>
+        <label htmlFor={`${inputInfo.valueName}Input`}>
+          <small>{inputInfo.labelText}</small>
+        </label>
+        {renderInput()}
       </div>
     </div>
   );
