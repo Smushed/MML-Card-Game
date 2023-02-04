@@ -20,6 +20,8 @@ class Monster implements IMonster {
   public set type(value: string) {
     this.cardType = CardTypeEnum[value as keyof typeof CardTypeEnum];
   }
+  imageId: string;
+  // public get image(): string {}
 
   level: number;
   equippedItems: Equipment[];
@@ -35,6 +37,7 @@ class Monster implements IMonster {
     name: string,
     description: string,
     typeOfCard: CardTypeEnum,
+    imageId: string,
     level: number,
     equippedItems: Equipment[],
     equipmentSlots: EquipmentSlot[],
@@ -47,6 +50,7 @@ class Monster implements IMonster {
     this.name = name;
     this.description = description;
     this.cardType = typeOfCard;
+    this.imageId = imageId;
     this.level = level;
     this.equippedItems = equippedItems;
     this.equipmentSlots = equipmentSlots;
@@ -63,6 +67,7 @@ function createGenericMonster(): Monster {
     'Generic Card', // name
     'This is a generic card', // description
     CardTypeEnum.Monster, // typeOfCard
+    'genericImage.png', // image
     1, // level
     [], // equippedItems
     [

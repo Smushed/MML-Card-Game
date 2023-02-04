@@ -20,6 +20,7 @@ namespace MML_Card_BE.Models.Card.Useable
         {
             get => CardType.ToString();
         }
+        public string? imageId { get; set; }
 
         public EquipmentSlot Slot { get; set; }
         public int? Bonus { get; set; }

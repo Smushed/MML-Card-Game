@@ -17,6 +17,7 @@ class Equipment implements IEquipment {
   public set type(value: string) {
     this.cardType = CardTypeEnum[value as keyof typeof CardTypeEnum];
   }
+  imageId: string;
 
   private slot: EquipmentSlotEnum;
   public get equipmentSlot(): string {
@@ -32,6 +33,7 @@ class Equipment implements IEquipment {
     name: string,
     description: string,
     cardType: CardTypeEnum,
+    imageId: string,
     slot: EquipmentSlotEnum,
     bonus: number
   ) {
@@ -39,6 +41,7 @@ class Equipment implements IEquipment {
     this.name = name;
     this.description = description;
     this.cardType = cardType;
+    this.imageId = imageId;
     this.slot = slot;
     this.bonus = bonus;
   }

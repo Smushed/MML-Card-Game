@@ -1,14 +1,15 @@
 import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
-import CardBase, { createGenericCardBase } from '../../models/CardBase';
+import CardBase from '../../models/CardBase';
 import SelectWindow from './SelectWindow';
 
 import './CardLibrary.css';
 import CardDisplayAndEditor from './CardDisplayAndEditor';
 import { Hero, Monster } from '../../models/Creature';
 import { Barricade, Battlefield, Equipment } from '../../models/Useable';
+import { createGenericMonster } from '../../models/Creature/Monster';
 
-const genericCard = createGenericCardBase();
+const genericCard = createGenericMonster();
 
 const CardContext = createContext<CardBase[]>([]);
 const SelectedCardContext = createContext<{

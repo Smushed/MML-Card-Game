@@ -48,7 +48,7 @@ const CardDisplay = () => {
             {checkAndReturnVal(selectedCard.selected, 'level')}
           </div>
           <div className='col-12'>
-            {checkAndReturnVal(selectedCard.selected, 'cardType')}
+            {checkAndReturnVal(selectedCard.selected, 'type')}
           </div>
           <div className='col-12'>
             {checkAndReturnVal(selectedCard.selected, 'description')}

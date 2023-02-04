@@ -7,5 +7,6 @@ namespace MML_Card_BE.Models.Card
         string _id { get; set; }
         string Name { get; set; }
         string? Description { get; set; }
+        string imageId { get; set; }
     }
 }

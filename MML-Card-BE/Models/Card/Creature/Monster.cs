@@ -14,6 +14,7 @@ namespace MML_Card_BE.Models.Card.Creature
         {
             get => CardType.ToString();
         }
+        public string? imageId { get; set; }
 
         public int Level { get; set; }
         public string[] CreatureType { get; set; } //This will come from the DB. Need to have a them in there

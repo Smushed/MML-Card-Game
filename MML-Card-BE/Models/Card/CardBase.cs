@@ -20,7 +20,8 @@ namespace MML_Card_BE.Models.Card
         {
             get { return CardType.ToString(); }
         }
-
+        [BsonElement("imageId")]
+        public string? imageId { get; set; }
 
         public CardBase(string? id, string name, string? description, CardTypeEnum typeOfCard)
         {

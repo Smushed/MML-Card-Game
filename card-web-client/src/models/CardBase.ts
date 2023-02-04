@@ -11,28 +11,22 @@ class CardBase implements ICardBase {
   public set type(value: string) {
     this.cardType = CardTypeEnum[value as keyof typeof CardTypeEnum];
   }
+  imageId: string;
 
   //Generated code, shouldn't need this. No cards should be here at this level
   constructor(
     _id: number,
     name: string,
     description: string,
-    typeOfCard: CardTypeEnum
+    typeOfCard: CardTypeEnum,
+    imageId: string
   ) {
     this._id = _id;
     this.name = name;
     this.description = description;
     this.cardType = typeOfCard;
+    this.imageId = imageId;
   }
-}
-
-function createGenericCardBase(): CardBase {
-  return new CardBase(
-    0,
-    'Generic Card',
-    'This is a generic card',
-    CardTypeEnum.Monster
-  );
 }
 
 interface ICardBase {
@@ -40,8 +34,8 @@ interface ICardBase {
   name: string;
   description: string;
   type: string;
+  imageId: string;
 }
 
-export { createGenericCardBase };
 export type { ICardBase };
 export default CardBase;

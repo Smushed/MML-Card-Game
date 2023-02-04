@@ -1,6 +1,3 @@
-import { ICardBase } from '../CardBase';
-import CardTypeEnum from '../Enum/CardTypeEnum';
-
 interface IAbility {
   _id: number;
   name: string;

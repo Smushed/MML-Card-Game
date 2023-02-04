@@ -18,6 +18,7 @@ class Hero implements IHero {
   public set type(value: string) {
     this.cardType = CardTypeEnum[value as keyof typeof CardTypeEnum];
   }
+  imageId: string;
 
   level: number;
   equippedItems: Equipment[];
@@ -31,6 +32,7 @@ class Hero implements IHero {
     name: string,
     description: string,
     cardType: CardTypeEnum,
+    imageId: string,
     level: number,
     equippedItems: Equipment[],
     equipmentSlots: EquipmentSlot[],
@@ -42,6 +44,7 @@ class Hero implements IHero {
     this.name = name;
     this.description = description;
     this.cardType = cardType;
+    this.imageId = imageId;
     this.level = level;
     this.equippedItems = equippedItems;
     this.equipmentSlots = equipmentSlots;
@@ -57,6 +60,7 @@ function createGenericHero(): Hero {
     'Generic Hero Card', // name
     'This is the Hero Description', // description
     CardTypeEnum.Hero, // typeOfCard
+    'genericImage.png', // image
     1, // level
     [], // equippedItems
     [

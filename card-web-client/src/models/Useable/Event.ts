@@ -17,6 +17,8 @@ class Event implements IEvent {
     this.cardType = CardTypeEnum[value as keyof typeof CardTypeEnum];
   }
 
+  imageId: string;
+
   public get isFlash(): boolean {
     return this.cardType.valueOf() === CardTypeEnum.FlashEvent.valueOf();
   }
@@ -28,12 +30,14 @@ class Event implements IEvent {
     name: string,
     description: string,
     cardType: CardTypeEnum,
+    imageId: string,
     onUse: Function
   ) {
     this._id = _id;
     this.name = name;
     this.description = description;
     this.cardType = cardType;
+    this.imageId = imageId;
     this.onUse = onUse;
   }
 }
