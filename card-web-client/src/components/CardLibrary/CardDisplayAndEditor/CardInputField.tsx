@@ -2,11 +2,11 @@ import EquipmentSlotEnum, {
   EquipmentSlotEnumArray,
 } from '../../../models/Enum/EquipmentSlotEnum';
 import { SelectedCardContext } from '..';
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { CardInputFields } from './Editor';
 import toast from 'react-hot-toast';
 import { CardTypeEnumArray } from '../../../models/Enum/CardTypeEnum';
-import { ModalContext } from '../../../App';
+import { ModalContentContext, ModalContext } from '../../../App';
 
 interface ICardInputField {
   inputInfo: CardInputFields;
@@ -123,8 +123,49 @@ const EquipmentSlotInput: FC<ICardInputField> = ({ inputInfo }) => {
 };
 
 const MonsterTypeSelect: FC = () => {
-  const { selected, setSelected } = useContext(SelectedCardContext);
-  const { modalOpen, setModalOpen } = useContext(ModalContext);
+  const [monsterTypeInput, setMonsterTypeInput] = useState<string>('');
+  const { setModalOpen } = useContext(ModalContext);
+  const { setModalContent } = useContext(ModalContentContext);
+
+  const openMonsterTypeModal = () => {
+    setModalContent(<MonsterTypeModal />);
+    setModalOpen(true);
+  };
+
+  const MonsterTypeModal: FC = () => {
+    const submitType = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    };
+
+    const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(e.target.value);
+      setMonsterTypeInput(e.target.value);
+    };
+
+    return (
+      <div className='row'>
+        <div className='col-12'>
+          <form
+            className='form-group text-center'
+            onSubmit={(e) => {
+              submitType(e);
+            }}
+          >
+            <label htmlFor='monsterType'>Monster Type</label>
+            <input
+              type='text'
+              className='form-control'
+              id='monsterType'
+              value={monsterTypeInput}
+              onChange={(e) => updateField(e)}
+            />
+            <button className='btn btn-primary mt-2'>Submit Type</button>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className='row'>
@@ -136,7 +177,7 @@ const MonsterTypeSelect: FC = () => {
         <div className='col-12'>
           <button
             className='btn btn-primary mt-2'
-            onClick={() => setModalOpen(true)}
+            onClick={() => openMonsterTypeModal()}
           >
             Add Type
           </button>

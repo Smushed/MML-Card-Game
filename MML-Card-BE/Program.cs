@@ -14,6 +14,7 @@ builder.Services.Configure<DatabaseSettings>(
 //var dbSettings = builder.Configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>();
 ////builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddSingleton<CardService>();
+builder.Services.AddSingleton<HeroService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -12,9 +12,9 @@ namespace MML_Card_BE.Models.Card.Useable
         public string? _id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
-        [BsonElement("description")]
-        public string? Description { get; set; }
 
+        [BsonElement("onUse")]
+        [BsonRepresentation(BsonType.String)]
         public Func<string> OnUse { get; set; }
     }
 }

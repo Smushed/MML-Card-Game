@@ -42,6 +42,6 @@ const App = () => {
   );
 };
 
-export { ModalContext };
+export { ModalContext, ModalContentContext };
 
 export default App;

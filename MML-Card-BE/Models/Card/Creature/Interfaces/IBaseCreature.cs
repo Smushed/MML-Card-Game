@@ -6,10 +6,10 @@ namespace MML_Card_BE.Models.Card.Creature.Interfaces
     public interface IBaseCreature : ICardBase
     {
         int Level { get; set; }
-        Equipment[] EquippedItems { get; set; }
-        EquipmentSlot[] EquipmentSlots { get; set; }
-        Effect[] Effect { get; set; }
-        Ability[] Abilities { get; set; }
+        List<Equipment> EquippedItems { get; set; }
+        List<EquipmentSlot> EquipmentSlots { get; set; }
+        List<Effect> Effect { get; set; }
+        List<Ability> Abilities { get; set; }
         Func<string> Exhaust { get; set; }
     }
 }
