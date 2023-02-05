@@ -26,7 +26,7 @@ namespace MML_Card_BE.Models.Card.Useable
 
         [BsonElement("imageId")]
         [BsonRepresentation(BsonType.String)]
-        public string? imageId { get; set; }
+        public string? ImageId { get; set; }
 
         [BsonElement("slot")]
         [BsonRepresentation(BsonType.Int32)]
@@ -35,5 +35,13 @@ namespace MML_Card_BE.Models.Card.Useable
         [BsonElement("bonus")]
         [BsonRepresentation(BsonType.Int32)]
         public int? Bonus { get; set; }
+
+        [BsonElement("cardNumber")]
+        [BsonRepresentation(BsonType.Int32)]
+        public int CardNumber { get; set; }
+
+        [BsonElement("CardSet")]
+        [BsonRepresentation(BsonType.String)]
+        public SetEnum Set { get; set; }
     }
 }
