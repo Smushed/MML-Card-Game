@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
+    "generate": "rm -r ./client/src/models && cp -r ./models ./client/src/models",
+    "client": "cd client && npm start",
     "start": "node dist/server.js",
     "start-dev": "ts-node src/server.ts",
-    "dev": "nodemon"
+    "dev": "concurrently \"nodemon --ignore client\" \"npm run client\""
   },
   "author": "Kevin Flerlage",
   "license": "ISC",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^18.11.19",
+    "concurrently": "^7.6.0",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1"
   }

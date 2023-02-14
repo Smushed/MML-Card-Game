@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from 'express';
 import mongoose from 'mongoose';
+import path from 'path';
 require('dotenv').config();
 
 const app: Express = express();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 4040;
 
-console.log(process.env.NODE_ENV);
 let mongoURL: string;
 if (process.env.NODE_ENV === 'production') {
   mongoURL = process.env.MONGO_ATLAS || '';
@@ -18,8 +18,10 @@ mongoose
   .then(() => console.log('Mongoose Connected Successfully'))
   .catch((err) => console.log('Mongoose Connection Error: ', err));
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, this is Express + TypeScript');
+require('./routes/cardRoutes')(app);
+
+app.get(`*`, (req, res) => {
+  res.sendFile(path.join(__dirname, `./client/build/index.html`));
 });
 
 app.listen(port, () => {
