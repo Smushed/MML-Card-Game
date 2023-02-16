@@ -7,10 +7,10 @@ interface IBarricade extends ICardBase {
 }
 
 class Barricade implements IBarricade {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -37,5 +37,17 @@ class Barricade implements IBarricade {
     this.onUse = onUse;
   }
 }
+
+const createGenericBarricade = (): Barricade =>
+  new Barricade(
+    new Types.ObjectId(),
+    'Generic Barricade',
+    'Generic Barricade Description',
+    CardTypeEnum.Barricade,
+    'genericImage.png',
+    () => {}
+  );
+
+export { createGenericBarricade };
 
 export default Barricade;

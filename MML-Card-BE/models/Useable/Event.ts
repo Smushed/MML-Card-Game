@@ -7,10 +7,10 @@ interface IEvent extends ICardBase {
 }
 
 class Event implements IEvent {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -42,5 +42,17 @@ class Event implements IEvent {
     this.onUse = onUse;
   }
 }
+
+const createGenericEvent = (): Event =>
+  new Event(
+    new Types.ObjectId(),
+    'Generic Event',
+    'Generic Event Description',
+    CardTypeEnum.Event,
+    'genericImage.png',
+    () => {}
+  );
+
+export { createGenericEvent };
 
 export default Event;

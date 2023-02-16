@@ -13,4 +13,22 @@ const checkAndReturnVal = (check: any, valueToPull: string): string => {
   }
 };
 
-export { doesHaveField, checkAndReturnVal };
+function copyPropertyValues<T>(s: T, d: any) {
+  for (const k in s) {
+    d[k] = s[k];
+  }
+}
+
+// function copyAllExcept<T>(
+//   target: any,
+//   source: T,
+//   skip: Extract<keyof T, string>[]
+// ) {
+//   for (const key in source) {
+//     if (source[key] != null && !skip.includes(key)) {
+//       target[key] = source[key];
+//     }
+//   }
+// }
+
+export { doesHaveField, checkAndReturnVal, copyPropertyValues };

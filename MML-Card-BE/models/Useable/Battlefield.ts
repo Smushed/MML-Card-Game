@@ -7,10 +7,10 @@ interface IBattlefield extends ICardBase {
 }
 
 class Battlefield implements IBattlefield {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -37,5 +37,17 @@ class Battlefield implements IBattlefield {
     this.onUse = onUse;
   }
 }
+
+const createGenericBattlefield = (): Battlefield =>
+  new Battlefield(
+    new Types.ObjectId(),
+    'Generic Battlefield',
+    'Generic Battlefield Description',
+    CardTypeEnum.Battlefield,
+    'genericImage.png',
+    () => {}
+  );
+
+export { createGenericBattlefield };
 
 export default Battlefield;

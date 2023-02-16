@@ -22,7 +22,7 @@ const ListItem: FC<IListItem> = ({ card }) => {
     >
       <div className='row'>
         <div className='col-4'>
-          {card.name} - {card.type}
+          {card.name} - {card.cardType}
         </div>
         <div className='col-8'>{card.description}</div>
       </div>

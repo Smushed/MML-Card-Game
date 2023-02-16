@@ -8,10 +8,10 @@ interface IEquipment extends ICardBase {
 }
 
 class Equipment implements IEquipment {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -47,5 +47,18 @@ class Equipment implements IEquipment {
     this.bonus = bonus;
   }
 }
+
+const createGenericEquipment = (): Equipment =>
+  new Equipment(
+    new Types.ObjectId(),
+    'Generic Equipment',
+    'Generic Equipment Description',
+    CardTypeEnum.Equipment,
+    'genericImage.png',
+    EquipmentSlotEnum.Head,
+    1
+  );
+
+export { createGenericEquipment };
 
 export default Equipment;

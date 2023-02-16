@@ -5,40 +5,12 @@ import { SelectedCardContext } from '..';
 import { FC, useContext, useState } from 'react';
 import { CardInputFields } from './Editor';
 import toast from 'react-hot-toast';
-import { CardTypeEnumArray } from '../../../models/Enum/CardTypeEnum';
+
 import { ModalContentContext, ModalContext } from '../../../App';
 
 interface ICardInputField {
   inputInfo: CardInputFields;
 }
-
-const CardTypeSelect: FC<ICardInputField> = ({ inputInfo }) => {
-  const { selected, setSelected } = useContext(SelectedCardContext);
-
-  const updateCardType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelected({
-      ...selected,
-      type: e.target.value,
-    } as typeof selected);
-  };
-
-  return (
-    <select
-      className='form-select'
-      id={inputInfo.valueName}
-      onChange={(e) => updateCardType(e)}
-      value={selected.type}
-    >
-      {CardTypeEnumArray.map((type) => {
-        return (
-          <option key={type} value={type}>
-            {type}
-          </option>
-        );
-      })}
-    </select>
-  );
-};
 
 const EquipmentSlotInput: FC<ICardInputField> = ({ inputInfo }) => {
   const { selected, setSelected } = useContext(SelectedCardContext);
@@ -256,7 +228,14 @@ const CardInputField: FC<ICardInputField> = ({ inputInfo }) => {
       case 'equipmentSlots':
         return <EquipmentSlotInput inputInfo={inputInfo} />;
       case 'cardType':
-        return <CardTypeSelect inputInfo={inputInfo} />;
+        return (
+          <input
+            className='form-control'
+            disabled
+            id={inputInfo.valueName}
+            value={selected.cardType}
+          />
+        );
       case 'monsterType':
         return <MonsterTypeSelect />;
       default:

@@ -9,10 +9,10 @@ import { IBaseCreature } from './IBaseCreature';
 interface IHero extends IBaseCreature {}
 
 class Hero implements IHero {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -55,23 +55,8 @@ class Hero implements IHero {
   }
 }
 
-const HeroSchema = new Schema<IHero>({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  type: { type: String, required: true },
-  imageId: { type: String, required: true },
-  level: { type: Number, required: true },
-  equippedItems: { type: [Equipment], required: true },
-  equipmentSlots: { type: [EquipmentSlot], required: true },
-  effect: { type: [Effect], required: true },
-  abilities: { type: [Ability], required: true },
-  exhaust: { type: Function, required: true },
-});
-
-const HeroModel = model<IHero>('Hero', HeroSchema);
-
-function createGenericHero(): Hero {
-  return new Hero(
+const createGenericHero = (): Hero =>
+  new Hero(
     new Types.ObjectId(), // _id
     'Generic Hero Card', // name
     'This is the Hero Description', // description
@@ -92,8 +77,6 @@ function createGenericHero(): Hero {
     [], // Abilities
     () => {} // Exhaust
   );
-}
 
-export type { IHero };
-export { createGenericHero, HeroSchema, HeroModel };
+export { createGenericHero };
 export default Hero;

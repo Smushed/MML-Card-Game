@@ -7,10 +7,10 @@ interface IEffect extends ICardBase {
 }
 
 class Effect implements IEffect {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -37,5 +37,17 @@ class Effect implements IEffect {
     this.onUse = onUse;
   }
 }
+
+const createGenericEffect = (): Effect =>
+  new Effect(
+    new Types.ObjectId(),
+    'Generic Effect',
+    'Generic Effect Description',
+    CardTypeEnum.Effect,
+    'genericImage.png',
+    () => {}
+  );
+
+export { createGenericEffect };
 
 export default Effect;

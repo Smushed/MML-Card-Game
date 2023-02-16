@@ -2,10 +2,10 @@ import { Types } from 'mongoose';
 import CardTypeEnum from './Enum/CardTypeEnum';
 
 class CardBase implements ICardBase {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -31,9 +31,9 @@ class CardBase implements ICardBase {
 }
 
 interface ICardBase {
-  _id: Types.ObjectId;
   name: string;
   description: string;
+  cardType: CardTypeEnum;
   type: string;
   imageId: string;
 }

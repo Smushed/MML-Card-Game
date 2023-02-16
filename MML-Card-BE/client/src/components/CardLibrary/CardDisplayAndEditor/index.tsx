@@ -10,22 +10,25 @@ const CardDisplayAndEditor = () => {
 
   const selectedCard = useContext(SelectedCardContext);
 
+  const clickEdit = () => {
+    selectedCard.setSelected(createGenericMonster());
+    setEditing(!editing);
+  };
+
+  const clickAdd = () => {
+    //TODO add card to database
+  };
+
   return (
     <div className='col-8 col-md-6'>
       <CardDisplay />
       {editing && <Editor />}
       <div className='row mt-4'>
         <div className=' d-flex col-12'>
-          <button className='btn btn-info' onClick={() => setEditing(true)}>
+          <button className='btn btn-info' onClick={clickEdit}>
             Edit
           </button>
-          <button
-            className='btn btn-success ms-4'
-            onClick={() => {
-              selectedCard.setSelected(createGenericMonster());
-              setEditing(true);
-            }}
-          >
+          <button className='btn btn-success ms-4' onClick={clickAdd}>
             Add
           </button>
         </div>
@@ -48,7 +51,7 @@ const CardDisplay = () => {
             {checkAndReturnVal(selectedCard.selected, 'level')}
           </div>
           <div className='col-12'>
-            {checkAndReturnVal(selectedCard.selected, 'type')}
+            {checkAndReturnVal(selectedCard.selected, 'cardType')}
           </div>
           <div className='col-12'>
             {checkAndReturnVal(selectedCard.selected, 'description')}

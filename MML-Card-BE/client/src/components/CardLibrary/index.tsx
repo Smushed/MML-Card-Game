@@ -5,11 +5,18 @@ import SelectWindow from './SelectWindow';
 
 import './CardLibrary.css';
 import CardDisplayAndEditor from './CardDisplayAndEditor';
-import { Hero, Monster } from '../../models/Creature';
-import { Barricade, Battlefield, Equipment } from '../../models/Useable';
-import { createGenericMonster } from '../../models/Creature/Monster';
+import {
+  Hero,
+  Monster,
+  Barricade,
+  Battlefield,
+  Equipment,
+  Event,
+  Effect,
+  createGenericCard,
+} from '../../models';
 
-const genericCard = createGenericMonster();
+const genericCard = createGenericCard.monster();
 
 const CardContext = createContext<CardBase[]>([]);
 const SelectedCardContext = createContext<{
@@ -20,10 +27,18 @@ const SelectedCardContext = createContext<{
     | Equipment
     | Barricade
     | Battlefield
-    | Event;
+    | Event
+    | Effect;
   setSelected: React.Dispatch<
     React.SetStateAction<
-      CardBase | Hero | Monster | Equipment | Barricade | Battlefield | Event
+      | CardBase
+      | Hero
+      | Monster
+      | Equipment
+      | Barricade
+      | Battlefield
+      | Event
+      | Effect
     >
   >;
 }>({ selected: genericCard, setSelected: () => {} });
@@ -31,7 +46,14 @@ const SelectedCardContext = createContext<{
 const CardLibrary = () => {
   const [cards, setCards] = useState<CardBase[]>([]);
   const [selectedCard, setSelectedCard] = useState<
-    CardBase | Hero | Monster | Equipment | Barricade | Battlefield | Event
+    | CardBase
+    | Hero
+    | Monster
+    | Equipment
+    | Barricade
+    | Battlefield
+    | Event
+    | Effect
   >(genericCard);
 
   useEffect(() => {
@@ -41,7 +63,6 @@ const CardLibrary = () => {
   const pullAllCards = async () => {
     try {
       const { data } = await axios.get('/api/card/all');
-      console.log({ data });
       setCards(data);
     } catch (err) {
       console.log(err);

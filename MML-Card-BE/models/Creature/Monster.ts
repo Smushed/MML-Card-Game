@@ -11,10 +11,10 @@ interface IMonster extends IBaseCreature {
 }
 
 class Monster implements IMonster {
-  _id: Types.ObjectId;
+  private _id: Types.ObjectId;
   name: string;
   description: string;
-  private cardType: CardTypeEnum;
+  cardType: CardTypeEnum;
   public get type(): string {
     return CardTypeEnum[this.cardType];
   }
@@ -62,8 +62,8 @@ class Monster implements IMonster {
   }
 }
 
-function createGenericMonster(): Monster {
-  return new Monster(
+const createGenericMonster = (): Monster =>
+  new Monster(
     new Types.ObjectId(), // _id
     'Generic Card', // name
     'This is a generic card', // description
@@ -85,7 +85,6 @@ function createGenericMonster(): Monster {
     () => {}, // exhaust
     ['Generic', 'Undead'] // monsterType
   );
-}
 
 export { createGenericMonster };
 export default Monster;
