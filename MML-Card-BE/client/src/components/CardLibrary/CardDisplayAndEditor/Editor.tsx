@@ -65,9 +65,6 @@ const CardTypeSelect: FC = () => {
       default:
         return;
     }
-    copyPropertyValues(selected, newCard);
-    const selectedCopy = { ...selected } as typeof selected;
-    selectedCopy.cardType = cardTypeEnum;
     setSelected(newCard);
   };
 
