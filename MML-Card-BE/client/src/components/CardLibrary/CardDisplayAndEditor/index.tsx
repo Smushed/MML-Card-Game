@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { SelectedCardContext } from '..';
 import { checkAndReturnVal } from '../../../functions/CardFieldChecker';
 import Editor from './Editor';
@@ -9,6 +9,10 @@ const CardDisplayAndEditor = () => {
   const [editing, setEditing] = useState<boolean>(false);
 
   const selectedCard = useContext(SelectedCardContext);
+
+  useEffect(() => {
+    clickEdit();
+  }, []);
 
   const clickEdit = () => {
     selectedCard.setSelected(createGenericMonster());

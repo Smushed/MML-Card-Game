@@ -1,9 +1,13 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import path from 'path';
 require('dotenv').config();
 
 const app: Express = express();
+const jsonParser = bodyParser.json();
+app.use(jsonParser);
+
 const port = process.env.PORT || 4040;
 
 let mongoURL: string;
@@ -19,6 +23,7 @@ mongoose
   .catch((err) => console.log('Mongoose Connection Error: ', err));
 
 require('./routes/cardRoutes')(app);
+require('./routes/creatureRoutes')(app);
 
 app.get(`*`, (req, res) => {
   res.sendFile(path.join(__dirname, `./client/build/index.html`));

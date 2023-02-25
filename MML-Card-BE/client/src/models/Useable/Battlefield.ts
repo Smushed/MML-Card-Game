@@ -8,6 +8,9 @@ interface IBattlefield extends ICardBase {
 
 class Battlefield implements IBattlefield {
   private _id: Types.ObjectId;
+  public get id(): string {
+    return this._id.toHexString();
+  }
   name: string;
   description: string;
   cardType: CardTypeEnum;

@@ -12,6 +12,9 @@ interface IMonster extends IBaseCreature {
 
 class Monster implements IMonster {
   private _id: Types.ObjectId;
+  public get id(): string {
+    return this._id.toHexString();
+  }
   name: string;
   description: string;
   cardType: CardTypeEnum;

@@ -6,7 +6,6 @@ interface IMonsterTypeSchema {
 }
 
 const MonsterTypeSchema = new Schema<IMonsterTypeSchema>({
-  _id: { type: Schema.Types.ObjectId, required: true },
   monsterType: { type: String, required: true },
 });
 

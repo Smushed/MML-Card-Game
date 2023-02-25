@@ -8,6 +8,9 @@ interface IEvent extends ICardBase {
 
 class Event implements IEvent {
   private _id: Types.ObjectId;
+  public get id(): string {
+    return this._id.toHexString();
+  }
   name: string;
   description: string;
   cardType: CardTypeEnum;

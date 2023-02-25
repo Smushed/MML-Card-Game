@@ -1,163 +1,13 @@
-import EquipmentSlotEnum, {
-  EquipmentSlotEnumArray,
-} from '../../../models/Enum/EquipmentSlotEnum';
 import { SelectedCardContext } from '..';
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 import { CardInputFields } from './Editor';
 import toast from 'react-hot-toast';
-
-import { ModalContentContext, ModalContext } from '../../../App';
+import MonsterTypeSelect from './Inputs/MonsterTypeSelect';
+import EquipmentSlotInput from './Inputs/EquipmentSlotInput';
 
 interface ICardInputField {
   inputInfo: CardInputFields;
 }
-
-const EquipmentSlotInput: FC<ICardInputField> = ({ inputInfo }) => {
-  const { selected, setSelected } = useContext(SelectedCardContext);
-  const slots = selected as any;
-
-  const updateEquipmentSlot = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    i: number
-  ) => {
-    const newSlots = slots.equipmentSlots;
-    newSlots[i] = e.target.value as EquipmentSlotEnum;
-    setSelected({ ...selected, equipmentSlots: newSlots } as typeof selected);
-  };
-
-  const addRemoveEquipmentSlot = (addOrRemove: string) => {
-    let updatedSlots;
-    switch (addOrRemove) {
-      case 'add':
-        updatedSlots = slots.equipmentSlots;
-        updatedSlots.push(EquipmentSlotEnum.Head);
-        setSelected({
-          ...selected,
-          equipmentSlots: updatedSlots,
-        } as typeof selected);
-        break;
-      case 'remove':
-        updatedSlots = slots.equipmentSlots;
-        updatedSlots.pop();
-        setSelected({
-          ...selected,
-          equipmentSlots: updatedSlots,
-        } as typeof selected);
-        break;
-    }
-  };
-
-  return (
-    <>
-      <div className='row'>
-        {slots.equipmentSlots.map((slot: EquipmentSlotEnum, i: number) => (
-          <div className='col-6' key={i}>
-            <div className='row'>
-              <div className='col-2'>{i + 1}</div>
-              <div className='col-8'>
-                <select
-                  className='form-select'
-                  id={inputInfo.valueName}
-                  value={slot}
-                  onChange={(e) => {
-                    updateEquipmentSlot(e, i);
-                  }}
-                >
-                  {EquipmentSlotEnumArray.map((slot) => (
-                    <option value={slot} key={slot}>
-                      {slot}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className='row'>
-        <div className='d-flex col-12 justify-content-evenly mt-2'>
-          <button
-            className='btn btn-primary'
-            onClick={() => addRemoveEquipmentSlot('add')}
-          >
-            Add Slot
-          </button>
-          <button
-            className='btn btn-warning'
-            onClick={() => addRemoveEquipmentSlot('remove')}
-          >
-            Remove Slot
-          </button>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const MonsterTypeSelect: FC = () => {
-  const [monsterTypeInput, setMonsterTypeInput] = useState<string>('');
-  const { setModalOpen } = useContext(ModalContext);
-  const { setModalContent } = useContext(ModalContentContext);
-
-  const openMonsterTypeModal = () => {
-    setModalContent(<MonsterTypeModal />);
-    setModalOpen(true);
-  };
-
-  const MonsterTypeModal: FC = () => {
-    const submitType = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-    };
-
-    const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
-      setMonsterTypeInput(e.target.value);
-    };
-
-    return (
-      <div className='row'>
-        <div className='col-12'>
-          <form
-            className='form-group text-center'
-            onSubmit={(e) => {
-              submitType(e);
-            }}
-          >
-            <label htmlFor='monsterType'>Monster Type</label>
-            <input
-              type='text'
-              className='form-control'
-              id='monsterType'
-              value={monsterTypeInput}
-              onChange={(e) => updateField(e)}
-            />
-            <button className='btn btn-primary mt-2'>Submit Type</button>
-          </form>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <>
-      <div className='row'>
-        <div className='col-12'>
-          <select></select>
-        </div>
-      </div>
-      <div className='row'>
-        <div className='col-12'>
-          <button
-            className='btn btn-primary mt-2'
-            onClick={() => openMonsterTypeModal()}
-          >
-            Add Type
-          </button>
-        </div>
-      </div>
-    </>
-  );
-};
 
 const CardInputField: FC<ICardInputField> = ({ inputInfo }) => {
   const { selected, setSelected } = useContext(SelectedCardContext);
@@ -280,4 +130,5 @@ const CardInputField: FC<ICardInputField> = ({ inputInfo }) => {
   );
 };
 
+export type { ICardInputField };
 export default CardInputField;

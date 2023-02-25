@@ -1,9 +1,6 @@
 import { FC, useContext } from 'react';
 import { SelectedCardContext } from '..';
-import {
-  copyPropertyValues,
-  doesHaveField,
-} from '../../../functions/CardFieldChecker';
+import { doesHaveField } from '../../../functions/CardFieldChecker';
 import CardInputField from './CardInputField';
 import CardTypeEnum, {
   CardTypeEnumArray,

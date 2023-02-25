@@ -29,13 +29,7 @@ const ModalWindow: FC<IModalWindow> = ({ children }) => {
   };
 
   return (
-    <Modal
-      isOpen={modalOpen}
-      // onAfterOpen={afterOpenModal}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel='Example Modal'
-    >
+    <Modal isOpen={modalOpen} onRequestClose={closeModal} style={customStyles}>
       {/* This is controlled by state on the App Level
           Done this way to dynamically change the modal widow while keeping on the top level of the app */}
       {children}

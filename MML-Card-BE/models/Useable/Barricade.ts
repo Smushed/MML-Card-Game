@@ -8,6 +8,9 @@ interface IBarricade extends ICardBase {
 
 class Barricade implements IBarricade {
   private _id: Types.ObjectId;
+  public get id(): string {
+    return this._id.toHexString();
+  }
   name: string;
   description: string;
   cardType: CardTypeEnum;

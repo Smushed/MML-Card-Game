@@ -10,6 +10,9 @@ interface IHero extends IBaseCreature {}
 
 class Hero implements IHero {
   private _id: Types.ObjectId;
+  public get id(): string {
+    return this._id.toHexString();
+  }
   name: string;
   description: string;
   cardType: CardTypeEnum;
