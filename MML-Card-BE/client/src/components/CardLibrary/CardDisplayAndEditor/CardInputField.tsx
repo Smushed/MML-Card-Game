@@ -3,7 +3,10 @@ import { FC, useContext } from 'react';
 import { CardInputFields } from './Editor';
 import toast from 'react-hot-toast';
 import MonsterTypeSelect from './Inputs/MonsterTypeSelect';
-import EquipmentSlotInput from './Inputs/EquipmentSlotInput';
+import {
+  EquipmentSlotForEquipCard,
+  EquipmentSlotInput,
+} from './Inputs/EquipmentSlotInput';
 
 interface ICardInputField {
   inputInfo: CardInputFields;
@@ -75,6 +78,8 @@ const CardInputField: FC<ICardInputField> = ({ inputInfo }) => {
             }}
           />
         );
+      case 'equipmentSlot':
+        return <EquipmentSlotForEquipCard inputInfo={inputInfo} />;
       case 'equipmentSlots':
         return <EquipmentSlotInput inputInfo={inputInfo} />;
       case 'cardType':
@@ -88,6 +93,15 @@ const CardInputField: FC<ICardInputField> = ({ inputInfo }) => {
         );
       case 'monsterType':
         return <MonsterTypeSelect />;
+      case 'TODO':
+        return (
+          <input
+            className='form-control'
+            disabled
+            id={inputInfo.valueName}
+            value='Not yet implemented'
+          />
+        );
       default:
         return <></>;
     }

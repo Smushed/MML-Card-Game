@@ -98,9 +98,9 @@ const Editor: FC = () => {
     {
       valueName: 'equipmentSlot',
       labelText: 'Equipment Slot',
-      inputType: 'select',
+      inputType: 'equipmentSlot',
     },
-    { valueName: 'effect', labelText: 'Effect', inputType: 'select' },
+    { valueName: 'effect', labelText: 'Effect', inputType: 'TODO' },
     { valueName: 'bonus', labelText: 'Bonus', inputType: 'number' },
     { valueName: 'abilities', labelText: 'Abilities', inputType: 'TODO' },
     {

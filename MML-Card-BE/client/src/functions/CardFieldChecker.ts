@@ -1,4 +1,5 @@
 const doesHaveField = (card: any, value: string): boolean => {
+  console.log(value);
   if (card === null) {
     return false;
   }

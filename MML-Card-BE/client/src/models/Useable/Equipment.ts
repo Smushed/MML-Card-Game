@@ -23,11 +23,11 @@ class Equipment implements IEquipment {
   }
   imageId: string;
 
-  private slot: EquipmentSlotEnum;
+  slot: EquipmentSlotEnum;
   public get equipmentSlot(): string {
     return EquipmentSlotEnum[this.slot];
   }
-  private set equipmentSlot(value: string) {
+  set equipmentSlot(value: string) {
     this.slot = EquipmentSlotEnum[value as keyof typeof EquipmentSlotEnum];
   }
   bonus: number;

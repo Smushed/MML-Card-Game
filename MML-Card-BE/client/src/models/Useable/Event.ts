@@ -22,10 +22,7 @@ class Event implements IEvent {
   }
 
   imageId: string;
-
-  public get isFlash(): boolean {
-    return this.cardType.valueOf() === CardTypeEnum.FlashEvent.valueOf();
-  }
+  isFlash: boolean;
 
   onUse: Function;
 
@@ -34,6 +31,7 @@ class Event implements IEvent {
     name: string,
     description: string,
     cardType: CardTypeEnum,
+    isFlash: boolean,
     imageId: string,
     onUse: Function
   ) {
@@ -41,6 +39,7 @@ class Event implements IEvent {
     this.name = name;
     this.description = description;
     this.cardType = cardType;
+    this.isFlash = isFlash;
     this.imageId = imageId;
     this.onUse = onUse;
   }
@@ -52,6 +51,7 @@ const createGenericEvent = (): Event =>
     'Generic Event',
     'Generic Event Description',
     CardTypeEnum.Event,
+    false,
     'genericImage.png',
     () => {}
   );

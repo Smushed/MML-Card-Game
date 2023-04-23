@@ -220,7 +220,9 @@ const MonsterTypeSelect = () => {
     <>
       <div className='row'>
         {selectedMonster.monsterType.map((type, i) => (
-          <div className='col-3 border m-2'>{type}</div>
+          <div className='col-3 border m-2' key={type + i}>
+            {type}
+          </div>
         ))}
       </div>
       <div className='row'>

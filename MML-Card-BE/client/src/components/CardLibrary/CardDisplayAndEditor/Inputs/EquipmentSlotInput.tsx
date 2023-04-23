@@ -2,8 +2,65 @@ import EquipmentSlotEnum, {
   EquipmentSlotEnumArray,
 } from '../../../../models/Enum/EquipmentSlotEnum';
 import { SelectedCardContext } from '../..';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { ICardInputField } from '../CardInputField';
+import { Equipment } from '../../../../models';
+
+interface ISingleEquipmentSlotInput {
+  htmlId: string;
+  slot: EquipmentSlotEnum;
+  updateEquipmentSlot: Function;
+  equipIndex: number;
+}
+
+const SingleEquipmentSlotInput: FC<ISingleEquipmentSlotInput> = ({
+  htmlId,
+  slot,
+  updateEquipmentSlot,
+  equipIndex,
+}) => {
+  return (
+    <select
+      className='form-select'
+      id={htmlId}
+      value={slot}
+      onChange={(e) => updateEquipmentSlot(e, equipIndex)}
+    >
+      {EquipmentSlotEnumArray.map((slot) => (
+        <option value={slot} key={slot}>
+          {slot}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+const EquipmentSlotForEquipCard: FC<ICardInputField> = ({ inputInfo }) => {
+  const { selected, setSelected } = useContext(SelectedCardContext);
+  const [selectedEquipment, setSelectedEquipment] = useState(
+    selected as Equipment
+  );
+  useEffect(() => {
+    setSelectedEquipment(selected as Equipment);
+  }, [selected]);
+
+  const updateSlot = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    selectedEquipment.equipmentSlot = e.target.value;
+    console.log({ selectedEquipment });
+    setSelected({
+      ...selectedEquipment,
+      slot: e.target.value as EquipmentSlotEnum,
+    } as typeof selected);
+  };
+  return (
+    <SingleEquipmentSlotInput
+      htmlId={inputInfo.valueName}
+      slot={selectedEquipment.slot}
+      updateEquipmentSlot={updateSlot}
+      equipIndex={0}
+    />
+  );
+};
 
 const EquipmentSlotInput: FC<ICardInputField> = ({ inputInfo }) => {
   const { selected, setSelected } = useContext(SelectedCardContext);
@@ -48,20 +105,12 @@ const EquipmentSlotInput: FC<ICardInputField> = ({ inputInfo }) => {
             <div className='row'>
               <div className='col-2'>{i + 1}</div>
               <div className='col-8'>
-                <select
-                  className='form-select'
-                  id={inputInfo.valueName}
-                  value={slot}
-                  onChange={(e) => {
-                    updateEquipmentSlot(e, i);
-                  }}
-                >
-                  {EquipmentSlotEnumArray.map((slot) => (
-                    <option value={slot} key={slot}>
-                      {slot}
-                    </option>
-                  ))}
-                </select>
+                <SingleEquipmentSlotInput
+                  htmlId={inputInfo.valueName}
+                  slot={slot}
+                  updateEquipmentSlot={updateEquipmentSlot}
+                  equipIndex={i}
+                />
               </div>
             </div>
           </div>
@@ -87,4 +136,8 @@ const EquipmentSlotInput: FC<ICardInputField> = ({ inputInfo }) => {
   );
 };
 
-export default EquipmentSlotInput;
+export {
+  SingleEquipmentSlotInput,
+  EquipmentSlotInput,
+  EquipmentSlotForEquipCard,
+};
